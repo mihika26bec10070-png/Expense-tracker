@@ -15,7 +15,7 @@ Features
 
 Technologies Used
 
-- Python 3
+- Python
 - Lists
 - Functions
 - Loops
