@@ -1,50 +1,40 @@
-expenses = []
-
-def add_expense():
-    name = input("Enter expense name: ")
-    amount = float(input("Enter amount: "))
-
-    expenses.append([name, amount])
-    print("Expense added successfully!")
-
-def show_expenses():
-    if len(expenses) == 0:
-        print("No expenses recorded.")
-    else:
-        print("\nYour Expenses:")
-        for expense in expenses:
-            print(expense[0], ":", expense[1])
-
-def total_expense():
-    total = 0
-
-    for expense in expenses:
-        total = total + expense[1]
-
-    print("Total Expense =", total)
+from expense import add_expense
+from storage import load_expenses
+from display import show_expenses
+from analysis import show_total, category_analysis
 
 
-while True:
-    print("\n----- EXPENSE TRACKER -----")
-    print("1. Add Expense")
-    print("2. Show Expenses")
-    print("3. Total Expense")
-    print("4. Exit")
+def main():
+    expenses = load_expenses()
 
-    choice = int(input("Enter your choice: "))
+    while True:
+        print("\n========== EXPENSE TRACKER ==========")
+        print("1. Add Expense")
+        print("2. View Expenses")
+        print("3. Total Expense")
+        print("4. Category Analysis")
+        print("5. Exit")
 
-    if choice == 1:
-        add_expense()
+        choice = input("Enter your choice: ")
 
-    elif choice == 2:
-        show_expenses()
+        if choice == "1":
+            add_expense(expenses)
 
-    elif choice == 3:
-        total_expense()
+        elif choice == "2":
+            show_expenses(expenses)
 
-    elif choice == 4:
-        print("Thank you!")
-        break
+        elif choice == "3":
+            show_total(expenses)
 
-    else:
-        print("Invalid choice!")
+        elif choice == "4":
+            category_analysis(expenses)
+
+        elif choice == "5":
+            print("Thank you for using Expense Tracker!")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+
+main()
